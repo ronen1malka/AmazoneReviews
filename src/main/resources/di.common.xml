@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd"
        default-lazy-init="true">
 
 
-    <bean id="countTasks"  class="com.ronenm.foodreview.counterstasks.Reviews" />
+
+    <context:component-scan base-package="com.ronenm.foodreview" />
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="classpath:application.properties" />
+    </bean>
+
+
+    <!--<bean id="countTasks"  class="com.ronenm.foodreview.counterstasks.Reviews" />-->
+
+    <!--<bean id="translateTasks"  class="com.ronenm.foodreview.translatetask.Translator" />-->
 
 
 </beans>

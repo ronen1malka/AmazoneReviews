@@ -3,6 +3,8 @@ package com.ronenm.foodreview.counterstasks;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.spark.sql.*;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
 import java.util.Arrays;
@@ -10,13 +12,15 @@ import java.util.Arrays;
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.desc;
 
-
+@Component
 public class Reviews {
+    @Value("${master.url}")
+    private String sparkMasterUrl;
 
-    public void doCounts(){
+    public void doCounts() {
         StopWatch stopWatch = new StopWatch("Counters tasks timing");
         Logger.getLogger("org").setLevel(Level.ERROR);
-        SparkSession session = SparkSession.builder().appName("StackOverFlowSurvey").master("local[1]").getOrCreate();
+        SparkSession session = SparkSession.builder().appName("StackOverFlowSurvey").master(sparkMasterUrl).getOrCreate();
 
         DataFrameReader dataFrameReader = session.read();
 
